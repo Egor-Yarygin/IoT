@@ -12,10 +12,9 @@ client.loop_start()
 print("Publishing")
 
 for _ in range(10):
-    state = "on" if random.randint(0,1) else "off"
+    state = str(input())
     print(f"state is {state}")
-    client.publish("house123456/bulb1 ", state)
-    time.sleep(random.randint(4, 10))
+    client.publish("house808/bulb1", state)
 
 client.disconnect()
 client.loop_stop()
