@@ -14,7 +14,7 @@ print("Publishing")
 for _ in range(10):
     state = str(input())
     print(f"state is {state}")
-    client.publish("house808/bulb1", state)
+    client.publish("house123456/bulb1", state)
 
 client.disconnect()
 client.loop_stop()
