@@ -2,7 +2,7 @@ import time
 import paho.mqtt.client as paho
 import random
 
-broker = "broker.hivemq.com"
+broker = "broker.emqx.io"
 
 client = paho.Client("client-isu-007")
 
