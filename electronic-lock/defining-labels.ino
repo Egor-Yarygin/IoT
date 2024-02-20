@@ -1,3 +1,5 @@
+//Скетч для определения RFID меток с модулем RC522 Arduino
+
 #include "SPI.h"
 #include "MFRC522.h"
 
