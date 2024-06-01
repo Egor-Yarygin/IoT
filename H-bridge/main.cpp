@@ -1,40 +1,44 @@
-#define ROW1 8
-#define ROW2 9
-#define COL1 10
-#define COL2 11
+#define PIN_L 3
+#define PIN_R 5
 
-void setup()
-{
-  pinMode(ROW1, OUTPUT);
-  pinMode(ROW2, OUTPUT);
-  pinMode(COL1, INPUT_PULLUP);
-  pinMode(COL2, INPUT_PULLUP);
-  
+void setup(){
+  pinMode(PIN_L, OUTPUT);
+  pinMode(PIN_R, OUTPUT);
   Serial.begin(9600);
+  
+  Serial.println("Input l or r and then speed. Ex: l40");
 }
 
-String buttons = "";
-
-void loop()
-{
-  for (int row = 0; row < 2; row++) {
-    int currentRowPin = (row == 0) ? ROW1 : ROW2;
-    int otherRowPin = (row == 0) ? ROW2 : ROW1;
-    digitalWrite(currentRowPin, LOW);
-    digitalWrite(otherRowPin, HIGH);
-
-    if(digitalRead(COL1) == LOW){
-      buttons += (row == 0) ? "1 " : "3 ";
-    }
-    if(digitalRead(COL2) == LOW){
-      buttons += (row == 0) ? "2 " : "4 ";
-    }
+void loop(){
+  if (Serial.available()) {
+    String input = Serial.readString();
+    Serial.println(input);
+    char command = input[0];
+    input.remove(0, 1); 
+    int speed = input.toInt();
+    
+    moveMotor(command, speed);
   }
+}
 
-  if(buttons != ""){
-    Serial.println(buttons);
-    buttons = "";
+void moveMotor(char dir, int speed){
+  
+  if (speed > 255){
+    speed = 255;
+  }else if (speed < 0) {
+    speed = 0;
   }
   
-  delay(200);
+  if (dir == 'l') {
+    analogWrite(PIN_L, speed); 
+    analogWrite(PIN_R, 0);
+    return;
+  } else if (dir == 'r') {
+    analogWrite(PIN_R, speed); 
+    analogWrite(PIN_L, 0);
+    return;
+  } else {
+    Serial.println("Unknown command, input l or r ");
+     return;
+  }
 }
