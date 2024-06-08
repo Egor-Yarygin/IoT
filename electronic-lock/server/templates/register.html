@@ -1,45 +1,69 @@
-<!-- <!DOCTYPE HTML>
-<html>
-<head>
-  <title>User Registration</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-</head>
-<body>
-  <form action="/register" method="post">
-    <label for="username">Username:</label>
-    <input type="text" id="username" name="username">
-    
-    <label for="ueid">UEID:</label>
-    <input type="text" id="ueid" name="ueid">
-    
-    <label for="password">Password:</label>
-    <input type="password" id="password" name="password">
-    
-    <button type="submit">Register</button>
-</form>
-
-</body>
-</html> -->
-
 <!DOCTYPE HTML>
 <html>
 <head>
-<title>User Registration</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>User Registration</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="/static/index_styles.css">
+    <style>
+        .centered-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        label, input {
+            margin: 10px 0;
+        }
+        input[type="text"], input[type="password"] {
+            padding: 10px;
+            width: 200px;
+        }
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        a {
+            color: #007BFF;
+            text-decoration: none;
+            margin-top: 20px;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
-<form action="/register" method="post">
-<label for="username">Username:</label>
-<input type="text" id="username" name="username"><br>
+    <header>
+        <h1>User Registration</h1>
+    </header>
+    <div class="centered-container">
+        <form action="/register" method="post">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
 
-<label for="ueid">UEID:</label>
-<input type="text" id="ueid" name="ueid"><br>
+            <label for="ueid">UEID:</label>
+            <input type="text" id="ueid" name="ueid" required>
 
-<label for="password">Password:</label>
-<input type="password" id="password" name="password"><br>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
 
-<button type="submit">Register</button>
-</form>
-<p><a href="/login">Already registered?</a></p>
+            <button type="submit">Register</button>
+        </form>
+        <p><a href="/login">Already registered?</a></p>
+    </div>
 </body>
 </html>
