@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User Keys</title>
+    <link rel="stylesheet" type="text/css" href="/static/index_styles.css">
+    <script>
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        }
+
+        function scrollToBottom() {
+            window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
+        }
+    </script>
+</head>
+<body>
+        <header>
+            <h1>User Keys</h1>
+            <div class="header-buttons">
+                <form method="get" action="/create" id="add-data">
+                    <button type="submit" class="button">Add Data</button>
+                </form>
+                <button onclick="scrollToTop()" class="button">&#x25B2;</button> <!-- Стрелка вверх -->
+                <button onclick="scrollToBottom()" class="button">&#x25BC;</button> <!-- Стрелка вниз -->
+                <form method="get" action="/logout" id="logout-form">
+                    <button type="submit" class="button">Login</button>
+                    </form>                    
+            </div>
+        </header>
+        <div class="container">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>UID</th>
+                        <th>User Name</th>
+                        <th>Permission</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for user in data %}
+                        <tr>
+                            <td>{{ user[0] }}</td>
+                            <td>{{ user[1] }}</td>
+                            <td>{{ user[2] }}</td>
+                            <td>{{ user[3] }}</td>
+                            <td>
+                                <form method="get" action="/edit/{{ user[0] }}" style="display:inline;">
+                                    <button type="submit" class="button">Edit</button>
+                                </form>
+                                <form method="post" action="/delete" style="display:inline;">
+                                    <input type="hidden" name="id" value="{{ user[0] }}">
+                                    <button type="submit" class="button">Delete</button>
+                                </form>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+</body>
+</html>

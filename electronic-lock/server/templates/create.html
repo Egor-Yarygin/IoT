@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Create User</title>
+    <script>
+        async function fetchUID() {
+            try {
+                const response = await fetch('/current_uid');
+                const data = await response.json();
+                const uidField = document.getElementById('uid');
+                if (data.uid && uidField.value !== data.uid) {
+                    uidField.value = data.uid;
+                }
+            } catch (error) {
+                console.error('Error fetching UID:', error);
+            }
+        }
+
+        setInterval(fetchUID, 2000);  // Запрашиваем текущий UID каждые 2 секунды
+    </script>
+</head>
+<body>
+    <h1>Create User</h1>
+    <form method="post" action="/create">
+        <label for="uid">UID:</label>
+        <input type="text" id="uid" name="uid" readonly>
+        <br>
+        <label for="user">User Name:</label>
+        <input type="text" id="user" name="user">
+        <br>
+        <label for="permission">Permission:</label>
+        <select id="permission" name="permission">
+            <option value="YES">YES</option>
+            <option value="NO">NO</option>
+        </select>
+        <br>
+        <input type="submit" value="Create">
+    </form>
+</body>
+</html>
