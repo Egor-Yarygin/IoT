@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>Edit Data</title>
-    <link rel="stylesheet" type="text/css" href="/static/styles.css">
+    <link rel="stylesheet" type="text/css" href="/static/index_styles.css">
     <script>
         function validateForm() {
             var permission = document.getElementById('permission').value.toUpperCase();
@@ -13,10 +13,48 @@
             return true;
         }
     </script>
+    <style>
+        .centered-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        label, input {
+            margin: 10px 0;
+        }
+        input[type="text"] {
+            padding: 10px;
+            width: 200px;
+        }
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
 </head>
 <body>
-    <div class="container">
-        <h2>Edit Data</h2>
+    <header>
+        <h1>Edit Data</h1>
+        <div class="header-buttons">
+            <button onclick="history.back()" class="button">&#x25C0; Back</button> <!-- Стрелка влево -->
+        </div>
+    </header>
+    <div class="centered-container">
         <form method="post" action="/edit/{{ user_data[0] }}" onsubmit="return validateForm()">
             <label for="uid">UID:</label>
             <input type="text" id="uid" name="uid" value="{{ user_data[1] }}" required>
